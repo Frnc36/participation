@@ -1,0 +1,9 @@
+0. GraphQL: Syntax Highlighting bővítmény
+
+1. .env másolat beállítás 
+LIGHTHOUSE_QUERY_CACHE_ENABLE=false beszúrni
+
+2. cd projekt
+composer install
+
+3. composer require mll-lab/laravel-graphiql
