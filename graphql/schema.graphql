@@ -1,6 +1,25 @@
-
+"""
+Sorrend
+Query
+Mutation
+User, Event
+"""
 type Query {
     users: [User!]! @all
+    user(id: ID! @eq): User @find
+
+    events: [Event!]! @all
+    event(id: ID! @eq): Event @find
+}
+
+type Mutation {
+    createUser(name: String!, email: String!, password: String!): User! @create
+    updateUser(id: ID! @eq, name: String, email: String): User! @update
+    deleteUser(id: ID! @eq): User! @delete
+
+    createEvent(title: String!): Event! @create
+    updateEvent(id: ID! @eq, title: String): Event! @update
+    deleteEvent(id: ID! @eq): Event! @delete
 }
 
 type User {
@@ -12,4 +31,9 @@ type User {
 
     "Unique email address."
     email: String!
+}
+
+type Event {
+    id: ID!
+    title: String!
 }

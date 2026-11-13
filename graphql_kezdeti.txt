@@ -7,3 +7,58 @@ LIGHTHOUSE_QUERY_CACHE_ENABLE=false beszúrni
 composer install
 
 3. composer require mll-lab/laravel-graphiql
+
+php artisan key:generate
+
+php artisan migrate:fresh --seed
+
+php artisan serve
+
+http://127.0.0.1:8000/graphiql
+
+query{
+  user(id: 1) {
+    id
+    name
+    email
+  }
+}
+
+mutation{
+  createUser(name: "Géza", email: "geza@email.hu", password:"geza"){
+    name,
+    email
+  }
+}
+
+mutation{
+  updateUser(id: 11, name: "Gizi"){
+    name,
+  }
+}
+
+mutation{
+deleteUser(id: 11){
+  name
+	}
+}
+
+query{events{id,title}}	
+
+mutation{
+  createEvent(title: "Sziget"){
+    title
+  }
+}
+
+mutation{
+  updateEvent(id: 5, title: "BalatonSound"){
+    title
+  }
+}
+
+mutation{
+  deleteEvent(id: 2){
+    title
+  }
+}
