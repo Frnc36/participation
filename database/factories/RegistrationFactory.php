@@ -22,7 +22,7 @@ class RegistrationFactory extends Factory
         return [
             'user_id' => User::all()->random()->id,
             'event_id' => Event::all()->random()->id,
-            'date' => fake()->date(),
+            'datetime' => fake()->dateTime(),
         ];
     }
 }

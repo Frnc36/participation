@@ -5,11 +5,20 @@ Mutation
 User, Event
 """
 type Query {
+    #User base queries
     users: [User!]! @all
     user(id: ID! @eq): User @find
-
+    userLike(name: String! @like): [User!]! @all
+    userPaginate(first: Int, page: Int): [User!]! @paginate
+    #Event base queries
     events: [Event!]! @all
     event(id: ID! @eq): Event @find
+    eventLike(title: String! @like): [Event!]! @all
+    eventWhere(id: ID! @where(operator: ">")): [Event!]! @all
+    eventPaginate(first: Int, page: Int): [Event!]! @paginate
+
+    registration(id: ID! @eq): Registration @find
+    registrationHasMany(id: ID! @eq): Registration @find
 }
 
 type Mutation {
@@ -19,6 +28,7 @@ type Mutation {
 
     createEvent(title: String!): Event! @create
     updateEvent(id: ID! @eq, title: String): Event! @update
+    #függöségek miatt nem lehet törölni
     deleteEvent(id: ID! @eq): Event! @delete
 }
 
@@ -36,4 +46,13 @@ type User {
 type Event {
     id: ID!
     title: String!
+}
+
+type Registration {
+    id: ID!
+    user_id: ID!
+    Event_id: ID!
+    date: DateTime!
+    user: User! @belongsTo
+    registration: Registration! @hasMany
 }

@@ -62,3 +62,35 @@ mutation{
     title
   }
 }
+
+query{
+  userLike(name: "%F%"){name}
+}
+
+query{
+  eventWhere(id: "3"){
+    id,
+    title
+  }
+}
+
+query{
+userPaginate(first: 3,page: 2){
+  data{id, name, email}
+	}
+}
+
+query{
+registration(id: 1){id, user_id}
+}
+
+query{
+registration(id: 1){
+  id,
+  user_id,
+  user{
+    name,
+    email
+  }
+}
+}
