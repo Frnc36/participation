@@ -1,3 +1,5 @@
+#import Mutations/*.graphql
+
 """
 Sorrend
 Query
@@ -17,19 +19,10 @@ type Query {
     eventWhere(id: ID! @where(operator: ">")): [Event!]! @all
     eventPaginate(first: Int, page: Int): [Event!]! @paginate
 
+    #all registrations, excluding soft deleted ones
+    registrations: [Registration!]! @all
     registration(id: ID! @eq): Registration @find
     registrationHasMany(id: ID! @eq): Registration @find
-}
-
-type Mutation {
-    createUser(name: String!, email: String!, password: String!): User! @create
-    updateUser(id: ID! @eq, name: String, email: String): User! @update
-    deleteUser(id: ID! @eq): User! @delete
-
-    createEvent(title: String!): Event! @create
-    updateEvent(id: ID! @eq, title: String): Event! @update
-    #függöségek miatt nem lehet törölni
-    deleteEvent(id: ID! @eq): Event! @delete
 }
 
 type User {
@@ -41,11 +34,13 @@ type User {
 
     "Unique email address."
     email: String!
+    events: [Event!]! @belongsToMany
 }
 
 type Event {
     id: ID!
-    title: String!
+    title: String
+    registrations: [Registration!]! @hasMany
 }
 
 type Registration {
@@ -54,5 +49,6 @@ type Registration {
     Event_id: ID!
     date: DateTime!
     user: User! @belongsTo
-    registration: Registration! @hasMany
+    event: Event! @belongsTo
+    """ registration: Registration! @hasMany """
 }

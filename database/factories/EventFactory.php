@@ -19,6 +19,9 @@ class EventFactory extends Factory
     {
         return [
             "title" => fake()->sentence(),
+            "early_bird_price" => fake()->numberBetween(1000, 10000),
+            "early_bird_until" => fake()->dateTime(),
+            "price_multiplier" => fake()->randomFloat(1, 0.5, 2.0)
         ];
     }
 }

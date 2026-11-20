@@ -94,3 +94,65 @@ registration(id: 1){
   }
 }
 }
+
+php artisan make:migration add_deleted_at_to_registrations
+
+php artisan lighthouse:mutation RegistrationMutation
+
+mutation{
+  createEvent(title: "Teszt"){
+    title
+  }
+}
+
+query{
+  users{
+    id
+  }
+}
+
+mutation{
+  updateEvent(id:11, title: "Teszt11"){
+    id,
+    title
+  }
+}
+
+mutation{
+  createUser(name:"Bea", email:"bea@email.hu", password: "Feri"){
+    name,
+    email,
+    password
+  }
+}
+
+query{
+  registrations{
+    id,
+		user_id
+  }
+}
+
+mutation{
+  forceDeleteRegistration(id:5){
+    id
+  }
+}
+
+query{
+  users{
+    id,
+    events{
+      title
+    }
+  }
+}
+
+query{
+  registrations{
+    id,
+    user{
+      name
+    }
+  }
+}
